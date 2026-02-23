@@ -8,7 +8,170 @@
     <link href="https://cdn.jsdelivr.net/npm/daisyui@4.7.2/dist/full.min.css" rel="stylesheet" type="text/css" />
     <link rel="stylesheet" href="style.css">
 </head>
-<body>
-    
+<body class="bg-slate-50 min-h-screen p-4 md:p-10 font-sans">
+
+    <div class="max-w-5xl mx-auto">
+        <header class="mb-8">
+            <h1 class="text-3xl font-black text-slate-900 tracking-tight">Job Application Tracker</h1>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6">
+                <div class="stat-box">
+                    <span class="stat-label">Total</span>
+                    <h2 id="total-count" class="text-4xl font-bold text-indigo-600">8</h2>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Interview</span>
+                    <h2 id="interview-count" class="text-4xl font-bold text-emerald-500">0</h2>
+                </div>
+                <div class="stat-box">
+                    <span class="stat-label">Rejected</span>
+                    <h2 id="rejected-count" class="text-4xl font-bold text-rose-500">0</h2>
+                </div>
+            </div>
+        </header>
+
+        <main class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+            <div class="p-6 border-b border-slate-100 flex justify-between items-center bg-white">
+                <h3 class="text-xl font-bold text-slate-700">Available Jobs</h3>
+                <span id="tab-job-count" class="text-sm font-bold bg-slate-100 px-3 py-1 rounded-full text-slate-500">8 jobs</span>
+            </div>
+
+            <div class="flex gap-2 px-6 py-4 bg-slate-50/50">
+                <button onclick="switchTab('all')" id="tab-all" class="tab-btn active">All</button>
+                <button onclick="switchTab('interview')" id="tab-interview" class="tab-btn">Interview</button>
+                <button onclick="switchTab('rejected')" id="tab-rejected" class="tab-btn">Rejected</button>
+            </div>
+
+            <div id="job-container" class="p-6 grid grid-cols-1 gap-4">
+                
+                <div class="job-card" data-status="all">
+                    <button onclick="removeCard(this)" class="delete-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>
+                    </button>
+                    <span class="company">Mobile First Corp</span>
+                    <h2 class="position">React Native Developer</h2>
+                    <p class="meta">📍 Remote • Full-time • $110,000 - $130,000</p>
+                    <span class="status-badge"></span>
+                    <p class="description">Leading mobile app development for high-growth fintech startups using React Native and TypeScript.</p>
+                    <div class="actions">
+                        <button onclick="changeStatus(this, 'interview')" class="btn-int">Interview</button>
+                        <button onclick="changeStatus(this, 'rejected')" class="btn-rej">Rejected</button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-status="all">
+                    <button onclick="removeCard(this)" class="delete-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>
+                    </button>
+                    <span class="company">WebFlow Agency</span>
+                    <h2 class="position">Web Designer & Developer</h2>
+                    <p class="meta">📍 London, UK • Part-time • $60,000 - $80,000</p>
+                    <span class="status-badge"></span>
+                    <p class="description">Crafting responsive marketing sites for luxury brands using Webflow and GSAP animations.</p>
+                    <div class="actions">
+                        <button onclick="changeStatus(this, 'interview')" class="btn-int">Interview</button>
+                        <button onclick="changeStatus(this, 'rejected')" class="btn-rej">Rejected</button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-status="all">
+                    <button onclick="removeCard(this)" class="delete-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>
+                    </button>
+                    <span class="company">DataViz Solutions</span>
+                    <h2 class="position">Data Visualization Specialist</h2>
+                    <p class="meta">📍 Boston, MA • Full-time • $90,000 - $120,000</p>
+                    <span class="status-badge"></span>
+                    <p class="description">Turning complex healthcare datasets into interactive dashboards using D3.js and React.</p>
+                    <div class="actions">
+                        <button onclick="changeStatus(this, 'interview')" class="btn-int">Interview</button>
+                        <button onclick="changeStatus(this, 'rejected')" class="btn-rej">Rejected</button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-status="all">
+                    <button onclick="removeCard(this)" class="delete-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>
+                    </button>
+                    <span class="company">CloudFirst Inc</span>
+                    <h2 class="position">Backend Developer</h2>
+                    <p class="meta">📍 Seattle, WA • Full-time • $130,000 - $160,000</p>
+                    <span class="status-badge"></span>
+                    <p class="description">Architecting scalable API services and managing AWS infrastructure for cloud-native apps.</p>
+                    <div class="actions">
+                        <button onclick="changeStatus(this, 'interview')" class="btn-int">Interview</button>
+                        <button onclick="changeStatus(this, 'rejected')" class="btn-rej">Rejected</button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-status="all">
+                    <button onclick="removeCard(this)" class="delete-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>
+                    </button>
+                    <span class="company">Innovation Labs</span>
+                    <h2 class="position">UI/UX Designer</h2>
+                    <p class="meta">📍 Austin, TX • Contract • $85,000 - $110,000</p>
+                    <span class="status-badge"></span>
+                    <p class="description">Leading the design system effort for a new Al-driven educational platform.</p>
+                    <div class="actions">
+                        <button onclick="changeStatus(this, 'interview')" class="btn-int">Interview</button>
+                        <button onclick="changeStatus(this, 'rejected')" class="btn-rej">Rejected</button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-status="all">
+                    <button onclick="removeCard(this)" class="delete-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>
+                    </button>
+                    <span class="company">MegaCore Solutions</span>
+                    <h2 class="position">JavaScript Developer</h2>
+                    <p class="meta">📍 New York, NY • Hybrid • $120,000 - $150,000</p>
+                    <span class="status-badge"></span>
+                    <p class="description">Architecting modular frontend components with Next.js for financial reporting systems.</p>
+                    <div class="actions">
+                        <button onclick="changeStatus(this, 'interview')" class="btn-int">Interview</button>
+                        <button onclick="changeStatus(this, 'rejected')" class="btn-rej">Rejected</button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-status="all">
+                    <button onclick="removeCard(this)" class="delete-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>
+                    </button>
+                    <span class="company">StartupXYZ</span>
+                    <h2 class="position">Full Stack Engineer</h2>
+                    <p class="meta">📍 Remote • Full-time • $100,000 - $140,000</p>
+                    <span class="status-badge"></span>
+                    <p class="description">Building the core engine of an e-commerce platform using the MERN stack.</p>
+                    <div class="actions">
+                        <button onclick="changeStatus(this, 'interview')" class="btn-int">Interview</button>
+                        <button onclick="changeStatus(this, 'rejected')" class="btn-rej">Rejected</button>
+                    </div>
+                </div>
+
+                <div class="job-card" data-status="all">
+                    <button onclick="removeCard(this)" class="delete-btn">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5"><path stroke-linecap="round" stroke-linejoin="round" d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0" /></svg>
+                    </button>
+                    <span class="company">TechCorp Industries</span>
+                    <h2 class="position">Senior Frontend Developer</h2>
+                    <p class="meta">📍 San Francisco • Full-time • $150,000 - $180,000</p>
+                    <span class="status-badge"></span>
+                    <p class="description">Optimizing performance and SEO for high-traffic media sites with millions of users.</p>
+                    <div class="actions">
+                        <button onclick="changeStatus(this, 'interview')" class="btn-int">Interview</button>
+                        <button onclick="changeStatus(this, 'rejected')" class="btn-rej">Rejected</button>
+                    </div>
+                </div>
+
+                <div id="no-jobs-msg" class="hidden py-20 text-center">
+                    <div class="text-6xl mb-4 text-slate-200">📄</div>
+                    <h3 class="text-xl font-bold text-slate-500 text-uppercase">No jobs available</h3>
+                    <p class="text-slate-400">Check back later or try a different tab.</p>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
